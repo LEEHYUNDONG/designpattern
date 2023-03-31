@@ -3,24 +3,36 @@ package com.hyundong.designpattern.observer.before;
 public class AssignmentTest {
     public static void main(String[] args) {
         Professor prof = new Professor();
-        Student student1 = new Student("student1", prof);
-        Student student2 = new Student("student2", prof);
 
+        //수강 신청(lecture 따로 만들지 않음)
+        prof.addStudent(new Student("student1", prof));
+        prof.addStudent(new Student("student2", prof));
 
         // 과제 내줌
         prof.makeAssignment("Math", "Algebra chapter2");
 
+        System.out.println("--------------------------------------------------");
+        System.out.println("\t\t\t\t 과제 전달");
+        System.out.println("--------------------------------------------------");
         
         // 과제 전달 받음
-        student1.setAssignment(prof.getAssignment());
-        student2.setAssignment(prof.getAssignment());
-        System.out.println("Assigment :" + student1.assignment.getSubject() + " " + student1.assignment.getContent());
+        for (Student student : prof.getStudentList()) {
+            student.setAssignment(prof.getAssignment());
+            System.out.println("Assigment :" + student.assignment.getSubject() + " " + student.assignment.getContent());
+        }
+
+        System.out.println("--------------------------------------------------");
+        System.out.println("\t\t\t\t 과제 변경");
+        System.out.println("--------------------------------------------------");
 
         //과제 update 이루어짐
         prof.updateAssignment("Math", "Algebra chapter2 and chapter3");
-        student1.setAssignment(prof.getAssignment());
-        student2.setAssignment(prof.getAssignment());
-        System.out.println("Changed Assigment :" + student1.assignment.getSubject() + " " + student1.assignment.getContent());
+        prof.notifyStudent();
+        for (Student student : prof.getStudentList()) {
+            System.out.println(student.getName() + " Changed Assigment :" + student.assignment.getSubject() + " " + student.assignment.getContent());
+        }
+
+        
         
     }
 }

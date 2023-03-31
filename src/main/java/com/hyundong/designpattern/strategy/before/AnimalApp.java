@@ -5,9 +5,15 @@ public class AnimalApp {
         Dog dog = new Dog();
         Cat cat = new Cat();
 
+        System.out.println("Dog");
         dog.sound();
-        cat.sound();
         dog.roaming();
+        dog.breed();
+
+        System.out.println("Cat");
+        cat.sound();
         cat.roaming();
+        cat.breed();
+
     }
 }

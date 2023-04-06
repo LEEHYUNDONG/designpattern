@@ -1,9 +1,9 @@
 package com.hyundong.designpattern.observer.after;
 
 public class Student implements Observer{
-    String name;
+    private String name;
 
-    Assignment assignment;
+    private Assignment assignment;
 
     public Student(String name, Assignment assignment) {
         this.name = name;
